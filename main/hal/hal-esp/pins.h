@@ -1,0 +1,12 @@
+#pragma once
+
+#define DEBUG_LED_PIN (GPIO_NUM_2)
+
+#define I2S_OUT_DATA_PIN (GPIO_NUM_5)
+#define I2S_OUT_SCLK_PIN (GPIO_NUM_6)
+#define I2S_OUT_LRCLK_PIN (GPIO_NUM_7)
+
+#define UTX1_PIN (GPIO_NUM_8)
+#define URX1_PIN (GPIO_NUM_9)
+
+#define BATMAN_ADC_CHANNEL (GPIO_NUM_10)
