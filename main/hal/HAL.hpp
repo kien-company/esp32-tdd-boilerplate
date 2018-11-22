@@ -1,11 +1,12 @@
 #pragma once
 
 #include "GPIO_HAL.hpp"
+#include "I2C_HAL.hpp"
 #include "LOGS.h"
 #include "Mutex.hpp"
 #include "Queue.hpp"
-#include "System.hpp"
 #include "Semaphore.hpp"
+#include "System.hpp"
 #include "Task.hpp"
 #include "pins.h"
 

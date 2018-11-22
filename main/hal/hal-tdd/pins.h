@@ -10,3 +10,6 @@
 #define URX1_PIN (9)
 
 #define BATMAN_ADC_CHANNEL (10)
+
+#define I2C_MASTER_SCL_PIN (26)
+#define I2C_MASTER_SDA_PIN (25)
