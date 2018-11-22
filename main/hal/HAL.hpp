@@ -16,8 +16,9 @@
  */
 class HAL {
    public:
-    HAL(GPIO_HAL* _gpio) : gpio(_gpio){};
+    HAL(GPIO_HAL* _gpio, I2C_HAL* _i2c) : gpio(_gpio), i2c(_i2c){};
     GPIO_HAL* gpio;
+    I2C_HAL* i2c;
 
     /**
      * Initializes the peripherals.
