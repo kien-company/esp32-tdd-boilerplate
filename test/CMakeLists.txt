@@ -1,60 +1,38 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(tdd-workshop)
+cmake_minimum_required(VERSION 2.8.2)
 
 enable_testing()
 
-find_package(Threads REQUIRED)
+# Download and unpack googletest at configure time
+configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
+execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+  RESULT_VARIABLE result
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+if(result)
+  message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+endif()
+execute_process(COMMAND ${CMAKE_COMMAND} --build .
+  RESULT_VARIABLE result
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+if(result)
+  message(FATAL_ERROR "Build step for googletest failed: ${result}")
+endif()
 
-# Enable ExternalProject CMake module
-include(ExternalProject)
+# Prevent overriding the parent project's compiler/linker
+# settings on Windows
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
-# Download and install GoogleTest
-ExternalProject_Add(
-    gtest
-    URL https://github.com/google/googletest/archive/release-1.8.1.zip
-    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
-    # Disable install step
-    INSTALL_COMMAND ""
-)
+# Add googletest directly to our build. This defines
+# the gtest and gtest_main targets.
+add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
+                 ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
+                 EXCLUDE_FROM_ALL)
 
-# Get GTest source and binary directories from CMake project
-ExternalProject_Get_Property(gtest source_dir binary_dir)
-
-# Create a libgtest target to be used as a dependency by test programs
-add_library(libgtest IMPORTED STATIC GLOBAL)
-add_dependencies(libgtest gtest)
-
-# Set libgtest properties
-set_target_properties(libgtest PROPERTIES
-    "IMPORTED_LOCATION" "${binary_dir}/googlemock/gtest/libgtest.a"
-    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
-)
-
-# Create a libgmock target to be used as a dependency by test programs
-add_library(libgmock IMPORTED STATIC GLOBAL)
-add_dependencies(libgmock gtest)
-
-# Set libgmock properties
-set_target_properties(libgmock PROPERTIES
-    "IMPORTED_LOCATION" "${binary_dir}/googlemock/libgmock.a"
-    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
-)
-
-# Create a libgtest_main target to be used as a dependency by test programs
-add_library(libgtest_main IMPORTED STATIC GLOBAL)
-add_dependencies(libgtest_main gtest)
-
-# Set libgtest_main properties
-set_target_properties(libgtest_main PROPERTIES
-    "IMPORTED_LOCATION" "${binary_dir}/googlemock/gtest/libgtest_main.a"
-    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
-)
-
-# I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
-include_directories("${source_dir}/googletest/include"
-                    "${source_dir}/googlemock/include"
-)
+# The gtest/gtest_main targets carry header search path
+# dependencies automatically when using CMake 2.8.11 or
+# later. Otherwise we have to add them here ourselves.
+if (CMAKE_VERSION VERSION_LESS 2.8.11)
+  include_directories("${gtest_SOURCE_DIR}/include")
+endif()
 
 # Add path to source files
 include_directories(
@@ -75,5 +53,5 @@ add_executable(led
     ${PROJECT_SOURCE_DIR}/../main/hal/hal-tdd/HAL_TDD.cpp
     TestLEDBlink.cpp ${PROJECT_SOURCE_DIR}/../main/system/DebugLED.cpp
 )
-target_link_libraries(led libgtest libgtest_main libgmock)
+target_link_libraries(led gtest gtest_main gmock)
 add_test(NAME TestLEDBlink COMMAND led)
