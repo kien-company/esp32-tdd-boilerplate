@@ -2,16 +2,15 @@
 
 #include <stdint.h>
 
-typedef enum {
-	ePinLow  = 0,
-	ePinHigh = 1
-} ePinState;
+typedef enum { ePinLow = 0, ePinHigh = 1 } ePinState;
 
 /**
  * GPIO driver interface.
  */
 class GPIO_HAL {
    public:
+    ~GPIO_HAL(){};
+
     /**
      * Defines GPIO configuration (directions...).
      */

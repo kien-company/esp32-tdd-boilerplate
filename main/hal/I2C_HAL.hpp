@@ -9,6 +9,8 @@
  */
 class I2C_HAL {
    public:
+    ~I2C_HAL(){};
+
     /**
      * Initializes a master I2C peripheral at the given frequency..
      *
