@@ -55,3 +55,10 @@ add_executable(led
 )
 target_link_libraries(led gtest gtest_main gmock)
 add_test(NAME TestLEDBlink COMMAND led)
+
+add_executable(bme280
+    ${PROJECT_SOURCE_DIR}/../main/hal/hal-tdd/HAL_TDD.cpp
+    TestBME280.cpp ${PROJECT_SOURCE_DIR}/../main/periph/BME280.cpp
+)
+target_link_libraries(bme280 gtest gtest_main gmock)
+add_test(NAME TestBME280 COMMAND bme280)
