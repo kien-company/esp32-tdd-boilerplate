@@ -23,8 +23,8 @@ MATCHER_P2(ArrayCmp, array, len, "") {
     return !memcmp(array, arg, len);
 }
 
-ACTION_P(PassArr, array) {
-    arg1[0] = array[0];
+ACTION_P2(PassArr, array, len) {
+    memcpy(arg1, array, len);
     return Result::Ok;
 }
 
@@ -44,14 +44,16 @@ class TestBME280 : public ::testing::Test {
     }
 };
 
-TEST_F(TestBME280, SaveLEDStatus_when_TogglingLED) {
+TEST_F(TestBME280, ReturnID_when_Requested) {
     {
         uint8_t reg[] = {0xD0};
         uint8_t id[] = {0x60};
 
         InSequence dummy;
-        EXPECT_CALL(*m_i2c, write(BME280_I2C_ADDR, ArrayCmp(reg, 1), 1));
-        EXPECT_CALL(*m_i2c, read(BME280_I2C_ADDR, _, 1)).WillOnce(PassArr(id));
+        EXPECT_CALL(*m_i2c,
+                    write(BME280_I2C_ADDR, ArrayCmp(reg, sizeof(reg)), 1));
+        EXPECT_CALL(*m_i2c, read(BME280_I2C_ADDR, _, 1))
+            .WillOnce(PassArr(id, sizeof(id)));
     }
 
     EXPECT_EQ(0x60, bme->id());
