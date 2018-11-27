@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  test:
+    working_directory: ~/esp32-tdd-boilerplate/
+    docker:
+      - image: rikorose/gcc-cmake
+    steps:
+      - checkout
+      - run: cd test && cmake .
+      - run: cd test && make all test
+  build:
+    working_directory: ~/esp32-tdd-boilerplate/
+    docker:
+      - image: espressif/esp32-ci-env
+    steps:
+      - checkout
+      - run: git clone https://github.com/espressif/esp-idf.git --branch v3.1.1
+      - run:
+          command: |
+            echo "IDF_PATH := ./esp-idf" > Makefile.local
+            make all
+      - run: make size
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test

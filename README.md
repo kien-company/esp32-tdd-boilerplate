@@ -1,5 +1,6 @@
 Boilerplate for TDD on ESP32
 ============================
+[![CircleCI](https://circleci.com/gh/kien-company/esp32-tdd-boilerplate.svg?style=svg)](https://circleci.com/gh/kien-company/esp32-tdd-boilerplate)
 
 This repo contains a boilerplate that demonstrates how to do TDD and CI with the ESP32.
 
