@@ -37,10 +37,8 @@ class TestBME280 : public ::testing::Test {
     virtual void SetUp() { bme = new BME280(); }
 
     virtual void TearDown() {
-        // Enabling the two lines below causes a segfault during cleanup (though
-        // the tests pass)
-        // Mock::VerifyAndClearExpectations(m_i2c);
-        // Mock::VerifyAndClear(m_i2c);
+        Mock::VerifyAndClearExpectations(m_i2c);
+        Mock::VerifyAndClear(m_i2c);
         Mock::AllowLeak(m_i2c);
         delete bme;
     }
