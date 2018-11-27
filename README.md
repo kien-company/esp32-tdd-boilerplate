@@ -6,9 +6,9 @@ This repo contains a boilerplate that demonstrates how to do TDD and CI with the
 
 ## Setting up the environment
 1. Install [ESP32 toolchain](https://esp-idf.readthedocs.io/en/latest/get-started/index.html#setup-toolchain)
-2. Install [ESP-IDF 3.1.1](https://esp-idf.readthedocs.io/en/latest/get-started/index.html#get-esp-idf)
+2. Install [ESP-IDF 3.1](https://esp-idf.readthedocs.io/en/latest/get-started/index.html#get-esp-idf)
     1. Clone the repo (`git clone git@github.com:espressif/esp-idf.git`)
-    2. Checkout to version v3.1 (`git checkout v3.1.1`)
+    2. Checkout to version v3.1 (`git checkout v3.1`)
     3. Update submodules (`git submodule update --init --recursive`)
 3. Create a file called `Makefile.local` in the project root with the following content:
 ```

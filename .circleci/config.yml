@@ -14,7 +14,7 @@ jobs:
       - image: espressif/esp32-ci-env
     steps:
       - checkout
-      - run: git clone https://github.com/espressif/esp-idf.git --branch v3.1.1
+      - run: git clone https://github.com/espressif/esp-idf.git --branch v3.1
       - run:
           command: |
             echo "IDF_PATH := ./esp-idf" > Makefile.local
