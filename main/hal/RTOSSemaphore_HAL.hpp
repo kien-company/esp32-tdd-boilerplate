@@ -1,7 +1,7 @@
 /****************************************************************************
  *
  *  Copyright (c) 2017, Michael Becker (michael.f.becker@gmail.com)
- *  Modifications Copyright (c) 2018, Xabier Crespo Álvarez, Kien (Netherlands)
+ *  Modifications Copyright (c) 2018, OUBORG & GATIN B.V. (Netherlands)
  *
  *  This file is part of the FreeRTOS Add-ons project.
  *

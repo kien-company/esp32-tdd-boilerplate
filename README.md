@@ -33,3 +33,6 @@ To keep a common coding style, the files that have been modified shall be format
 Note. Many IDEs allow to do this automatically, check in the Preferences or in the avaiable Plugins.
 
 There is also available a config file for [EditorConfig](https://editorconfig.org). Make sure you install that in your IDE.
+
+## License
+This repository is released under the MIT license. Please refer to the LICENSE file.
