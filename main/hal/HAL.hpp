@@ -1,7 +1,10 @@
 #pragma once
 
+// Run-time substitution
 #include "GPIO_HAL.hpp"
 #include "I2C_HAL.hpp"
+
+// Link-time substitution
 #include "LOGS.h"
 #include "Mutex.hpp"
 #include "Queue.hpp"
