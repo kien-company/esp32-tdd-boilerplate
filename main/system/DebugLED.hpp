@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hal/HAL.hpp"
+#include "HAL.hpp"
 
 /**
  * This is a debugging class which can be used to blink the onboard LED.

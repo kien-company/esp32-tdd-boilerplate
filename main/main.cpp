@@ -4,7 +4,7 @@
 
 #include "system/DebugLED.hpp"
 
-#include "hal/hal-esp/HAL_ESP.hpp"
+#include "HAL.hpp"
 
 static HAL& hal = getHAL();
 

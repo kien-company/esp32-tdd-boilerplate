@@ -1,6 +1,6 @@
 #include "BME280.hpp"
 
-#include "hal/HAL.hpp"
+#include "HAL.hpp"
 
 static HAL& hal = getHAL();
 static const char LTAG[] = "BME280";
